@@ -42,9 +42,11 @@ public class SFTPConnectService {
 		FTPFile[] files = ftpClient.listFiles();
 
 		FileDetail fileDetail = null;
+		int i =0;
 		for (FTPFile file : files) {
 			if (file.isFile()) {
 				fileDetail = new FileDetail();
+				fileDetail.setFileId(""+ (++i));
 				fileDetail.setFileName(file.getName());
 				fileDetail.setFilesize(file.getSize() + " KB");
 				if (logger.isDebugEnabled())

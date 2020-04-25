@@ -14,8 +14,13 @@ import com.fss.cms.sftpapi.dto.FileTransferDTO;
 import com.fss.cms.sftpapi.service.SFTPConnectService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Example;
+import io.swagger.annotations.ExampleProperty;
 
 @RestController
 @Api(value = "/sftpconnect", description = "Services used to get the file list and transfer files from SFTP")
@@ -28,6 +33,9 @@ public class SFTPConnectController {
 
 	@ApiOperation(value = "API for get file list from SFTP", notes = "List the files from the SFTP")
 	@RequestMapping(value = "/getfilelist", method = RequestMethod.GET, produces = "application/json")
+	@ApiResponses(value = {
+		    @ApiResponse(code = 200, message = "List of files get from SFTP")
+		})
 	public FileDetailsDTO getFileList() {
 		FileDetailsDTO fileDetailsDTO = new FileDetailsDTO();
 		try {
@@ -50,14 +58,15 @@ public class SFTPConnectController {
 
 	@ApiOperation(value = "API For transfer files from SFTP", notes = "Transfer files from SFTP to local given loaction")
 	@RequestMapping(value = "/transferfile", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public FileTransferDTO transferFile(@ApiParam(
-            value = "Transfer file to the given local location" ,
-            example = "{downloadloaction: 'C:\\Downloads',filename: 'test2.txt'}") @RequestBody FileTransferDTO fileTransferDTO) {
+	@ApiResponses(value = {
+		    @ApiResponse(code = 200, message = "Download file response")
+		})
+	public FileTransferDTO transferFile(@RequestBody FileTransferDTO fileTransferDTO) {
 		try {
 			if (sftpConnectService.transferfile(fileTransferDTO)) {
 				fileTransferDTO.setResponseCode(0);
 				fileTransferDTO.setResponseMsg("Success");
-			}else {
+			} else {
 				fileTransferDTO.setResponseCode(1);
 				fileTransferDTO.setResponseMsg("Error occured while downloading");
 			}
