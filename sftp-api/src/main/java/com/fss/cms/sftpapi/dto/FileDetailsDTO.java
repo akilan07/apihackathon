@@ -4,10 +4,14 @@ import java.util.List;
 
 import com.fss.cms.sftpapi.modal.FileDetail;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class FileDetailsDTO {
 
 	private List<FileDetail> fileDetails;
+	@ApiModelProperty(notes = "Response code after download 0 - success, 1 - failure")
 	private int responseCode;
+	@ApiModelProperty(notes = "Response Description after download success, failure", example = "Success")
 	private String responseMsg;
 
 	public List<FileDetail> getFileDetails() {

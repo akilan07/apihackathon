@@ -1,10 +1,16 @@
 package com.fss.cms.sftpapi.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class FileTransferDTO {
 
+	@ApiModelProperty(notes = "filename download from sftp", example = "test2.txt")
 	private String filename;
+	@ApiModelProperty(notes = "download Location in local system", example = "C:\\Downloads")
 	private String downloadloaction;
+	@ApiModelProperty(notes = "Response code after download 0 - success, 1 - failure")
 	private int responseCode;
+	@ApiModelProperty(notes = "Response Description after download success, failure", example = "Success")
 	private String responseMsg;
 
 	public String getFilename() {

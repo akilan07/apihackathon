@@ -1,9 +1,14 @@
 package com.fss.cms.sftpapi.modal;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class FileDetail {
 
+	@ApiModelProperty(notes = "fieldId", example = "1")
 	private String fileId;
+	@ApiModelProperty(notes = "filename", example = "test2.txt")
 	private String fileName;
+	@ApiModelProperty(notes = "filesize", example = "5 Kb")
 	private String filesize;
 
 	public String getFileId() {
